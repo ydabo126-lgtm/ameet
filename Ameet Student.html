@@ -1,0 +1,2887 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>AMEET - Espace Étudiant</title>
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<style>
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+:root{
+    --bleu:#031e99;
+    --bleu-fonce:#02156d;
+    --bleu-clair:#eef2ff;
+    --blanc:#fff;
+    --gris:#64748b;
+    --fond:#f5f7fb;
+    --danger:#dc2626;
+    --vert:#047857;
+    --ombre:0 8px 25px rgba(15,23,42,.08);
+}
+
+body{
+    font-family:"Segoe UI",Arial,sans-serif;
+    background:var(--fond);
+    color:#1e293b;
+}
+
+button,input,select,textarea{
+    font-family:inherit;
+}
+
+button{
+    cursor:pointer;
+}
+
+.page{
+    display:none;
+    min-height:100vh;
+}
+
+.page.active{
+    display:block;
+}
+
+/* ================================
+   CONNEXION
+================================ */
+
+.connexion-page{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:25px;
+    background:linear-gradient(135deg,#031e99,#02156d);
+}
+
+.connexion-box{
+    width:430px;
+    max-width:100%;
+    padding:38px 32px;
+    background:white;
+    border-radius:18px;
+    box-shadow:0 20px 50px rgba(0,0,0,.22);
+    text-align:center;
+}
+
+.logo-connexion{
+    width:65px;
+    height:65px;
+    margin:0 auto 15px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    border-radius:15px;
+    background:var(--bleu);
+    color:white;
+    font-size:26px;
+}
+
+.connexion-box h1{
+    color:var(--bleu);
+    font-size:30px;
+}
+
+.slogan{
+    color:var(--gris);
+    margin:7px 0 25px;
+    font-size:14px;
+}
+
+/* ================================
+   FORMULAIRES
+================================ */
+
+.champ{
+    text-align:left;
+    margin-bottom:17px;
+}
+
+.champ label{
+    display:block;
+    margin-bottom:7px;
+    font-weight:600;
+    color:#334155;
+}
+
+.input-icon{
+    position:relative;
+}
+
+.input-icon i{
+    position:absolute;
+    left:14px;
+    top:50%;
+    transform:translateY(-50%);
+    color:var(--bleu);
+}
+
+.input-icon input,
+.input-icon select{
+    padding-left:42px;
+}
+
+input,
+select,
+textarea{
+    width:100%;
+    padding:13px 14px;
+    border:1px solid #d8dee9;
+    border-radius:9px;
+    outline:none;
+    background:white;
+    font-size:15px;
+}
+
+input:focus,
+select:focus,
+textarea:focus{
+    border-color:var(--bleu);
+    box-shadow:0 0 0 3px rgba(3,30,153,.08);
+}
+
+textarea{
+    min-height:130px;
+    resize:vertical;
+}
+
+/* ================================
+   BOUTONS
+================================ */
+
+.btn{
+    width:100%;
+    border:none;
+    border-radius:9px;
+    padding:13px;
+    margin-top:9px;
+    font-weight:600;
+    font-size:15px;
+    background:var(--bleu);
+    color:white;
+    transition:.2s;
+}
+
+.btn:hover{
+    background:var(--bleu-fonce);
+}
+
+.btn-secondaire{
+    background:#eef2ff;
+    color:var(--bleu);
+}
+
+.btn-secondaire:hover{
+    background:#e1e7ff;
+}
+
+.btn-retour{
+    background:#64748b;
+}
+
+.btn-retour:hover{
+    background:#475569;
+}
+
+.btn-danger{
+    background:var(--danger);
+    margin-top:25px;
+}
+
+.btn-danger:hover{
+    background:#b91c1c;
+}
+
+/* ================================
+   INSCRIPTION
+================================ */
+
+.inscription-page{
+    min-height:100vh;
+    padding:45px 20px;
+    background:#f5f7fb;
+}
+
+.form-box{
+    max-width:700px;
+    margin:auto;
+    background:white;
+    padding:35px;
+    border-radius:18px;
+    box-shadow:var(--ombre);
+}
+
+.form-header{
+    text-align:center;
+    margin-bottom:28px;
+}
+
+.form-header .icone{
+    width:60px;
+    height:60px;
+    margin:auto auto 13px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:14px;
+    background:var(--bleu-clair);
+    color:var(--bleu);
+    font-size:24px;
+}
+
+.form-header h1{
+    color:var(--bleu);
+}
+
+.form-header p{
+    color:var(--gris);
+    margin-top:6px;
+}
+
+/* ================================
+   IDENTIFIANTS
+================================ */
+
+.identifiants-inscription{
+    display:none;
+    margin-top:20px;
+    padding:20px;
+    background:#f5f7ff;
+    border:1px solid #dbe3ff;
+    border-radius:12px;
+}
+
+.identifiants-inscription h3{
+    color:var(--bleu);
+    text-align:center;
+    margin-bottom:15px;
+}
+
+.identifiant-item{
+    background:white;
+    padding:13px;
+    margin:10px 0;
+    border-radius:9px;
+    border:1px solid #e2e8f0;
+}
+
+.identifiant-label{
+    display:block;
+    color:var(--gris);
+    font-size:12px;
+    margin-bottom:5px;
+}
+
+.identifiant-ligne{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+}
+
+.identifiant-ligne strong{
+    color:var(--bleu);
+    word-break:break-all;
+}
+
+.btn-copier{
+    border:0;
+    background:var(--bleu);
+    color:white;
+    padding:8px 11px;
+    border-radius:7px;
+}
+
+/* ================================
+   HEADER
+================================ */
+
+.header{
+    background:linear-gradient(135deg,#031e99,#02156d);
+    color:white;
+    padding:25px 20px;
+}
+
+.header-content{
+    max-width:1100px;
+    margin:auto;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:20px;
+}
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:13px;
+}
+
+.brand-icon{
+    width:55px;
+    height:55px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:rgba(255,255,255,.12);
+    border-radius:14px;
+    font-size:23px;
+}
+
+.brand h2{
+    font-size:26px;
+}
+
+.brand p{
+    font-size:13px;
+    opacity:.85;
+    margin-top:3px;
+}
+
+.profil-etudiant{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:9px 13px;
+    background:rgba(255,255,255,.12);
+    border-radius:10px;
+}
+
+.profil-icon{
+    width:38px;
+    height:38px;
+    border-radius:50%;
+    background:white;
+    color:var(--bleu);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.profil-etudiant small{
+    display:block;
+    opacity:.7;
+}
+
+/* ================================
+   MENU
+================================ */
+
+.menu{
+    background:white;
+    padding:10px;
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:5px;
+    box-shadow:0 3px 12px rgba(0,0,0,.06);
+    position:sticky;
+    top:0;
+    z-index:50;
+}
+
+.menu button{
+    width:auto;
+    margin:0;
+    border:0;
+    background:white;
+    color:#475569;
+    padding:9px 12px;
+    border-radius:7px;
+    font-weight:600;
+}
+
+.menu button:hover{
+    background:var(--bleu-clair);
+    color:var(--bleu);
+}
+
+.menu button i{
+    color:var(--bleu);
+    margin-right:5px;
+}
+
+/* ================================
+   DASHBOARD
+================================ */
+
+.dashboard{
+    max-width:1100px;
+    margin:auto;
+    padding:30px 18px;
+}
+
+.bienvenue{
+    background:white;
+    padding:25px;
+    border-radius:13px;
+    margin-bottom:25px;
+    box-shadow:var(--ombre);
+    border-left:4px solid var(--bleu);
+}
+
+.bienvenue h2{
+    color:var(--bleu);
+    margin-bottom:7px;
+}
+
+.bienvenue p{
+    color:var(--gris);
+}
+
+.services{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:17px;
+}
+
+.service{
+    background:white;
+    padding:23px;
+    border-radius:14px;
+    border:1px solid #edf0f5;
+    box-shadow:0 4px 16px rgba(15,23,42,.05);
+    cursor:pointer;
+    transition:.2s;
+}
+
+.service:hover{
+    transform:translateY(-3px);
+    box-shadow:0 10px 25px rgba(3,30,153,.10);
+}
+
+.service-icon{
+    width:48px;
+    height:48px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:var(--bleu-clair);
+    color:var(--bleu);
+    border-radius:11px;
+    margin-bottom:14px;
+    font-size:20px;
+}
+
+.service h3{
+    margin-bottom:7px;
+    color:#172554;
+}
+
+.service p{
+    color:var(--gris);
+    font-size:14px;
+    line-height:1.5;
+}
+
+/* ================================
+   ZONES SERVICES
+================================ */
+
+.zone-service{
+    display:none;
+    background:white;
+    max-width:800px;
+    margin:25px auto;
+    padding:30px;
+    border-radius:15px;
+    box-shadow:var(--ombre);
+}
+
+.zone-service.active-service{
+    display:block;
+}
+
+.service-header{
+    text-align:center;
+    padding-bottom:20px;
+    margin-bottom:22px;
+    border-bottom:1px solid #edf0f5;
+}
+
+.service-header-icon{
+    width:60px;
+    height:60px;
+    margin:auto auto 13px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:var(--bleu-clair);
+    color:var(--bleu);
+    border-radius:13px;
+    font-size:24px;
+}
+
+.service-header h2{
+    color:var(--bleu);
+    margin-bottom:6px;
+}
+
+.service-header p{
+    color:var(--gris);
+}
+
+/* ================================
+   OPTIONS
+================================ */
+
+.option{
+    display:flex;
+    gap:15px;
+    background:#f8faff;
+    padding:18px;
+    border-radius:11px;
+    margin:12px 0;
+    border:1px solid #e0e6ff;
+}
+
+.option-icon{
+    flex-shrink:0;
+    width:43px;
+    height:43px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:var(--bleu);
+    color:white;
+    border-radius:9px;
+}
+
+.option h3{
+    color:var(--bleu);
+    margin-bottom:5px;
+}
+
+.option p{
+    color:var(--gris);
+    line-height:1.5;
+    font-size:14px;
+}
+
+/* ================================
+   CONFIRMATION
+================================ */
+
+.confirmation{
+    display:none;
+    background:#ecfdf5;
+    color:var(--vert);
+    padding:14px;
+    margin-top:15px;
+    border-radius:9px;
+    text-align:center;
+    border:1px solid #a7f3d0;
+}
+
+/* ================================
+   PAGES LOGEMENT
+================================ */
+
+.page-logement{
+    min-height:100vh;
+    padding:30px 18px;
+    background:#f5f7fb;
+}
+
+.logement-box{
+    max-width:700px;
+    margin:auto;
+    background:white;
+    padding:30px;
+    border-radius:15px;
+    box-shadow:var(--ombre);
+}
+
+.logement-titre{
+    text-align:center;
+    margin-bottom:25px;
+}
+
+.logement-titre h1{
+    color:var(--bleu);
+    font-size:25px;
+}
+
+.logement-titre p{
+    color:var(--gris);
+    margin-top:6px;
+}
+
+/* ================================
+   RÉCAPITULATIF
+================================ */
+
+.recap{
+    border:1px solid #e2e8f0;
+    border-radius:11px;
+    overflow:hidden;
+    margin-bottom:20px;
+}
+
+.recap-ligne{
+    display:flex;
+    justify-content:space-between;
+    gap:20px;
+    padding:13px 15px;
+    border-bottom:1px solid #edf0f5;
+}
+
+.recap-ligne:last-child{
+    border-bottom:0;
+}
+
+.recap-ligne span{
+    color:var(--gris);
+}
+
+.recap-ligne strong{
+    color:#172554;
+    text-align:right;
+}
+
+/* ================================
+   PAIEMENT
+================================ */
+
+.paiement-card{
+    text-align:center;
+    background:#f5f7ff;
+    border:1px solid #dbe3ff;
+    padding:22px;
+    border-radius:12px;
+    margin-bottom:20px;
+}
+
+.paiement-card small{
+    color:var(--gris);
+}
+
+.paiement-card .montant{
+    color:var(--bleu);
+    font-size:32px;
+    font-weight:700;
+    margin:7px 0;
+}
+
+.paiement-card p{
+    color:var(--gris);
+    font-size:14px;
+}
+
+.rang-final{
+    text-align:center;
+    background:#f5f7ff;
+    border:1px solid #dbe3ff;
+    padding:25px;
+    border-radius:12px;
+    margin-bottom:20px;
+}
+
+.rang-final small{
+    color:var(--gris);
+}
+
+.rang-final strong{
+    display:block;
+    color:var(--bleu);
+    font-size:40px;
+    margin:5px 0;
+}
+
+/* ================================
+   FOOTER
+================================ */
+
+footer{
+    text-align:center;
+    padding:25px;
+    color:#64748b;
+    font-size:13px;
+}
+
+footer strong{
+    color:var(--bleu);
+}
+
+/* ================================
+   RESPONSIVE
+================================ */
+
+@media(max-width:850px){
+
+    .services{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .header-content{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    .profil-etudiant{
+        width:100%;
+    }
+}
+
+@media(max-width:600px){
+
+    .connexion-box,
+    .form-box,
+    .zone-service,
+    .logement-box{
+        padding:22px 17px;
+    }
+
+    .services{
+        grid-template-columns:1fr;
+    }
+
+    .menu{
+        justify-content:flex-start;
+        overflow-x:auto;
+        flex-wrap:nowrap;
+    }
+
+    .menu button{
+        white-space:nowrap;
+    }
+
+    .recap-ligne{
+        flex-direction:column;
+        gap:4px;
+    }
+
+    .recap-ligne strong{
+        text-align:left;
+    }
+
+    .option{
+        padding:15px;
+    }
+}
+
+</style>
+
+</head>
+
+<body>
+
+
+<!-- =========================================================
+     PAGE CONNEXION
+========================================================= -->
+
+<div id="pageConnexion" class="page active">
+
+<div class="connexion-page">
+
+<div class="connexion-box">
+
+<div class="logo-connexion">
+<i class="fa-solid fa-graduation-cap"></i>
+</div>
+
+<h1>AMEET</h1>
+
+<p class="slogan">
+Amicale des Élèves et Étudiants de Tanaff
+</p>
+
+<div class="champ">
+
+<label>Nom d'utilisateur</label>
+
+<div class="input-icon">
+
+<i class="fa-solid fa-user"></i>
+
+<input
+type="text"
+id="utilisateur"
+placeholder="Votre nom d'utilisateur">
+
+</div>
+
+</div>
+
+<div class="champ">
+
+<label>Mot de passe</label>
+
+<div class="input-icon">
+
+<i class="fa-solid fa-lock"></i>
+
+<input
+type="password"
+id="motdepasse"
+placeholder="Votre mot de passe">
+
+</div>
+
+</div>
+
+<button class="btn" onclick="seConnecter()">
+
+<i class="fa-solid fa-right-to-bracket"></i>
+
+Se connecter
+
+</button>
+
+<button class="btn btn-secondaire"
+onclick="afficherInscription()">
+
+<i class="fa-solid fa-user-plus"></i>
+
+Créer un compte
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- =========================================================
+     PAGE INSCRIPTION
+========================================================= -->
+
+<div id="pageInscription" class="page">
+
+<div class="inscription-page">
+
+<div class="form-box">
+
+<div class="form-header">
+
+<div class="icone">
+<i class="fa-solid fa-user-graduate"></i>
+</div>
+
+<h1>AMEET</h1>
+
+<p>Créer votre compte étudiant</p>
+
+</div>
+
+
+<div class="champ">
+
+<label>Prénom</label>
+
+<div class="input-icon">
+
+<i class="fa-solid fa-user"></i>
+
+<input type="text"
+id="prenom"
+placeholder="Votre prénom">
+
+</div>
+
+</div>
+
+
+<div class="champ">
+
+<label>Nom</label>
+
+<div class="input-icon">
+
+<i class="fa-solid fa-user"></i>
+
+<input type="text"
+id="nom"
+placeholder="Votre nom">
+
+</div>
+
+</div>
+
+
+<div class="champ">
+
+<label>Faculté</label>
+
+<div class="input-icon">
+
+<i class="fa-solid fa-building-columns"></i>
+
+<input type="text"
+id="faculte"
+placeholder="Exemple : FST">
+
+</div>
+
+</div>
+
+
+<div class="champ">
+
+<label>Département</label>
+
+<div class="input-icon">
+
+<i class="fa-solid fa-sitemap"></i>
+
+<input type="text"
+id="departement"
+placeholder="Exemple : Biologie">
+
+</div>
+
+</div>
+
+
+<div class="champ">
+
+<label>Formation</label>
+
+<div class="input-icon">
+
+<i class="fa-solid fa-book-open"></i>
+
+<input type="text"
+id="formation"
+placeholder="Votre formation">
+
+</div>
+
+</div>
+
+
+<div class="champ">
+
+<label>Niveau</label>
+
+<div class="input-icon">
+
+<i class="fa-solid fa-layer-group"></i>
+
+<select id="niveau">
+
+<option value="">Choisissez votre niveau</option>
+<option>Licence 1</option>
+<option>Licence 2</option>
+<option>Licence 3</option>
+<option>Master 1</option>
+<option>Master 2</option>
+<option>Doctorat</option>
+
+</select>
+
+</div>
+
+</div>
+
+
+<div class="champ">
+
+<label>Adresse email</label>
+
+<div class="input-icon">
+
+<i class="fa-solid fa-envelope"></i>
+
+<input type="email"
+id="email"
+placeholder="exemple@email.com">
+
+</div>
+
+</div>
+
+
+<button class="btn"
+onclick="envoyerInscription()">
+
+<i class="fa-solid fa-paper-plane"></i>
+
+Envoyer l'inscription
+
+</button>
+
+
+<button class="btn btn-retour"
+onclick="afficherConnexion()">
+
+<i class="fa-solid fa-arrow-left"></i>
+
+Retour à la connexion
+
+</button>
+
+
+<div id="confirmationInscription"
+class="confirmation">
+
+<i class="fa-solid fa-circle-check"></i>
+
+Votre inscription a été envoyée avec succès.
+
+</div>
+
+
+<div id="identifiantsInscription"
+class="identifiants-inscription">
+
+<h3>
+
+<i class="fa-solid fa-key"></i>
+
+Vos identifiants
+
+</h3>
+
+<div class="identifiant-item">
+
+<span class="identifiant-label">
+Nom d'utilisateur
+</span>
+
+<div class="identifiant-ligne">
+
+<strong id="nouvelUtilisateur">-</strong>
+
+<button class="btn-copier"
+onclick="copierTexte('nouvelUtilisateur')">
+
+<i class="fa-solid fa-copy"></i>
+
+Copier
+
+</button>
+
+</div>
+
+</div>
+
+
+<div class="identifiant-item">
+
+<span class="identifiant-label">
+Mot de passe
+</span>
+
+<div class="identifiant-ligne">
+
+<strong id="nouveauMotDePasse">-</strong>
+
+<button class="btn-copier"
+onclick="copierTexte('nouveauMotDePasse')">
+
+<i class="fa-solid fa-copy"></i>
+
+Copier
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- =========================================================
+     ESPACE ÉTUDIANT
+========================================================= -->
+
+<div id="pageAccueil" class="page">
+
+<header class="header">
+
+<div class="header-content">
+
+<div class="brand">
+
+<div class="brand-icon">
+<i class="fa-solid fa-graduation-cap"></i>
+</div>
+
+<div>
+
+<h2>AMEET</h2>
+
+<p>
+Amicale des Élèves et Étudiants de Tanaff
+</p>
+
+</div>
+
+</div>
+
+<div class="profil-etudiant">
+
+<div class="profil-icon">
+<i class="fa-solid fa-user"></i>
+</div>
+
+<div>
+
+<small>Étudiant connecté</small>
+
+<strong id="nomEtudiant">
+Utilisateur
+</strong>
+
+</div>
+
+</div>
+
+</div>
+
+</header>
+
+
+<nav class="menu">
+
+<button onclick="allerAccueil()">
+<i class="fa-solid fa-house"></i>
+Accueil
+</button>
+
+<button onclick="ouvrirService('concours')">
+<i class="fa-solid fa-trophy"></i>
+Concours
+</button>
+
+<button onclick="ouvrirService('examen')">
+<i class="fa-solid fa-file-pen"></i>
+Examens
+</button>
+
+<button onclick="ouvrirService('tutorat')">
+<i class="fa-solid fa-chalkboard-user"></i>
+Tutorat
+</button>
+
+<button onclick="ouvrirService('formationPro')">
+<i class="fa-solid fa-briefcase"></i>
+Formations
+</button>
+
+<button onclick="ouvrirService('logement')">
+<i class="fa-solid fa-house"></i>
+Logement
+</button>
+
+<button onclick="ouvrirService('conseil')">
+<i class="fa-solid fa-comments"></i>
+Conseil
+</button>
+
+</nav>
+
+
+<main class="dashboard">
+
+
+<div class="bienvenue">
+
+<h2>
+Bienvenue dans votre espace étudiant
+</h2>
+
+<p>
+L'AMEET vous accompagne dans votre
+parcours académique, social et professionnel.
+</p>
+
+</div>
+
+
+<!-- SERVICES -->
+
+<div id="listeServices" class="services">
+
+
+<div class="service"
+onclick="ouvrirService('concours')">
+
+<div class="service-icon">
+<i class="fa-solid fa-trophy"></i>
+</div>
+
+<h3>Concours</h3>
+
+<p>
+Informations et préparation aux différents concours.
+</p>
+
+</div>
+
+
+<div class="service"
+onclick="ouvrirService('examen')">
+
+<div class="service-icon">
+<i class="fa-solid fa-file-circle-check"></i>
+</div>
+
+<h3>Préparation examen</h3>
+
+<p>
+Préparez efficacement vos différentes sessions.
+</p>
+
+</div>
+
+
+<div class="service"
+onclick="ouvrirService('tutorat')">
+
+<div class="service-icon">
+<i class="fa-solid fa-chalkboard-user"></i>
+</div>
+
+<h3>Tutorat</h3>
+
+<p>
+Bénéficiez d'un accompagnement pédagogique.
+</p>
+
+</div>
+
+
+<div class="service"
+onclick="ouvrirService('formationPro')">
+
+<div class="service-icon">
+<i class="fa-solid fa-briefcase"></i>
+</div>
+
+<h3>Formation professionnelle</h3>
+
+<p>
+Construisez votre projet professionnel.
+</p>
+
+</div>
+
+
+<div class="service"
+onclick="ouvrirService('logement')">
+
+<div class="service-icon">
+<i class="fa-solid fa-house-user"></i>
+</div>
+
+<h3>Demande de logement</h3>
+
+<p>
+Soumettez votre demande de logement étudiant.
+</p>
+
+</div>
+
+
+<div class="service"
+onclick="ouvrirService('conseil')">
+
+<div class="service-icon">
+<i class="fa-solid fa-headset"></i>
+</div>
+
+<h3>Conseil</h3>
+
+<p>
+L'AMEET vous écoute, vous conseille et vous oriente.
+</p>
+
+</div>
+
+</div>
+
+
+<!-- =========================================================
+     CONCOURS
+========================================================= -->
+
+<div id="concours" class="zone-service">
+
+<div class="service-header">
+
+<div class="service-header-icon">
+<i class="fa-solid fa-trophy"></i>
+</div>
+
+<h2>Concours</h2>
+
+<p>
+Informations et préparation aux concours.
+</p>
+
+</div>
+
+
+<div class="option">
+
+<div class="option-icon">
+<i class="fa-solid fa-circle-info"></i>
+</div>
+
+<div>
+
+<h3>Informations</h3>
+
+<p>
+Consultez les conditions d'accès,
+dates, pièces à fournir et modalités
+d'inscription.
+</p>
+
+</div>
+
+</div>
+
+
+<div class="option">
+
+<div class="option-icon">
+<i class="fa-solid fa-book-open-reader"></i>
+</div>
+
+<div>
+
+<h3>Préparation</h3>
+
+<p>
+Ressources, exercices et accompagnement
+pour votre préparation.
+</p>
+
+</div>
+
+</div>
+
+
+<button class="btn btn-retour"
+onclick="fermerServices()">
+
+<i class="fa-solid fa-arrow-left"></i>
+
+Retour aux services
+
+</button>
+
+</div>
+
+
+<!-- =========================================================
+     EXAMEN
+========================================================= -->
+
+<div id="examen" class="zone-service">
+
+<div class="service-header">
+
+<div class="service-header-icon">
+<i class="fa-solid fa-file-pen"></i>
+</div>
+
+<h2>Préparation examen</h2>
+
+<p>
+Organisez votre préparation académique.
+</p>
+
+</div>
+
+
+<div class="option">
+
+<div class="option-icon">
+<i class="fa-solid fa-calendar-check"></i>
+</div>
+
+<div>
+
+<h3>Session normale</h3>
+
+<p>
+Accompagnement et préparation pour
+la session normale.
+</p>
+
+</div>
+
+</div>
+
+
+<div class="option">
+
+<div class="option-icon">
+<i class="fa-solid fa-rotate"></i>
+</div>
+
+<div>
+
+<h3>Session de rattrapage</h3>
+
+<p>
+Accompagnement spécifique pour
+la session de rattrapage.
+</p>
+
+</div>
+
+</div>
+
+
+<button class="btn btn-retour"
+onclick="fermerServices()">
+
+<i class="fa-solid fa-arrow-left"></i>
+
+Retour aux services
+
+</button>
+
+</div>
+
+
+<!-- =========================================================
+     TUTORAT
+========================================================= -->
+
+<div id="tutorat" class="zone-service">
+
+<div class="service-header">
+
+<div class="service-header-icon">
+<i class="fa-solid fa-chalkboard-user"></i>
+</div>
+
+<h2>Tutorat</h2>
+
+<p>
+Un accompagnement adapté à votre situation.
+</p>
+
+</div>
+
+
+<div class="option">
+
+<div class="option-icon">
+<i class="fa-solid fa-graduation-cap"></i>
+</div>
+
+<div>
+
+<h3>Boursière / Boursier</h3>
+
+<p>
+Accompagnement destiné aux étudiants
+bénéficiaires d'une bourse.
+</p>
+
+</div>
+
+</div>
+
+
+<div class="option">
+
+<div class="option-icon">
+<i class="fa-solid fa-user-graduate"></i>
+</div>
+
+<div>
+
+<h3>Non boursière / Non boursier</h3>
+
+<p>
+Accompagnement destiné aux étudiants
+non bénéficiaires d'une bourse.
+</p>
+
+</div>
+
+</div>
+
+
+<button class="btn btn-retour"
+onclick="fermerServices()">
+
+<i class="fa-solid fa-arrow-left"></i>
+
+Retour aux services
+
+</button>
+
+</div>
+
+
+<!-- =========================================================
+     FORMATION
+========================================================= -->
+
+<div id="formationPro" class="zone-service">
+
+<div class="service-header">
+
+<div class="service-header-icon">
+<i class="fa-solid fa-briefcase"></i>
+</div>
+
+<h2>Formation professionnelle</h2>
+
+<p>
+Présentez-nous votre projet professionnel.
+</p>
+
+</div>
+
+
+<div class="champ">
+
+<label>Formation souhaitée</label>
+
+<textarea id="formationSouhaitee"
+placeholder="Formation que vous souhaitez suivre..."></textarea>
+
+</div>
+
+
+<div class="champ">
+
+<label>
+Pourquoi souhaitez-vous faire cette formation ?
+</label>
+
+<textarea id="raisonFormation"
+placeholder="Expliquez votre motivation..."></textarea>
+
+</div>
+
+
+<button class="btn"
+onclick="envoyerFormation()">
+
+<i class="fa-solid fa-paper-plane"></i>
+
+Envoyer ma demande
+
+</button>
+
+
+<div id="confirmationFormation"
+class="confirmation">
+
+<i class="fa-solid fa-circle-check"></i>
+
+Votre demande a été envoyée avec succès.
+
+</div>
+
+
+<button class="btn btn-retour"
+onclick="fermerServices()">
+
+<i class="fa-solid fa-arrow-left"></i>
+
+Retour aux services
+
+</button>
+
+</div>
+
+
+<!-- =========================================================
+     LOGEMENT
+========================================================= -->
+
+<div id="logement" class="zone-service">
+
+<div class="service-header">
+
+<div class="service-header-icon">
+
+<i class="fa-solid fa-house-user"></i>
+
+</div>
+
+<h2>Demande de logement</h2>
+
+<p>
+Remplissez soigneusement le formulaire.
+</p>
+
+</div>
+
+
+<!-- SEXE -->
+
+<div class="champ">
+
+<label>Sexe</label>
+
+<div class="input-icon">
+
+<i class="fa-solid fa-venus-mars"></i>
+
+<select id="sexe">
+
+<option value="">
+Sélectionnez votre sexe
+</option>
+
+<option value="Féminin">
+Féminin
+</option>
+
+<option value="Masculin">
+Masculin
+</option>
+
+</select>
+
+</div>
+
+</div>
+
+
+<!-- QUARTIER -->
+
+<div class="champ">
+
+<label>Quartier résidentiel</label>
+
+<div class="input-icon">
+
+<i class="fa-solid fa-location-dot"></i>
+
+<input
+type="text"
+id="quartier"
+placeholder="Exemple : Médina">
+
+</div>
+
+</div>
+
+
+<!-- TELEPHONE ETUDIANT -->
+
+<div class="champ">
+
+<label>
+Numéro de téléphone de l'étudiant
+</label>
+
+<div class="input-icon">
+
+<i class="fa-solid fa-phone"></i>
+
+<input
+type="tel"
+id="telephoneEtudiant"
+placeholder="77 XXX XX XX">
+
+</div>
+
+</div>
+
+
+<!-- PIECE -->
+
+<div class="champ">
+
+<label>
+Numéro de la pièce d'identité
+</label>
+
+<div class="input-icon">
+
+<i class="fa-solid fa-id-card"></i>
+
+<input
+type="text"
+id="pieceIdentite"
+placeholder="Numéro de pièce d'identité">
+
+</div>
+
+</div>
+
+
+<!-- TUTEUR -->
+
+<div class="champ">
+
+<label>
+Numéro de téléphone du tuteur
+</label>
+
+<div class="input-icon">
+
+<i class="fa-solid fa-user-shield"></i>
+
+<input
+type="tel"
+id="telephoneTuteur"
+placeholder="77 XXX XX XX">
+
+</div>
+
+</div>
+
+
+<button class="btn"
+onclick="envoyerLogement()">
+
+<i class="fa-solid fa-arrow-right"></i>
+
+Continuer
+
+</button>
+
+
+<button class="btn btn-retour"
+onclick="fermerServices()">
+
+<i class="fa-solid fa-arrow-left"></i>
+
+Retour
+
+</button>
+
+</div>
+
+
+<!-- =========================================================
+     CONSEIL
+========================================================= -->
+
+<div id="conseil" class="zone-service">
+
+<div class="service-header">
+
+<div class="service-header-icon">
+<i class="fa-solid fa-headset"></i>
+</div>
+
+<h2>Conseil & Orientation</h2>
+
+<p>
+L'AMEET est à votre écoute.
+</p>
+
+</div>
+
+
+<div class="champ">
+
+<label>Votre demande</label>
+
+<textarea
+id="questionConseil"
+placeholder="Écrivez votre demande..."></textarea>
+
+</div>
+
+
+<button class="btn"
+onclick="envoyerConseil()">
+
+<i class="fa-solid fa-paper-plane"></i>
+
+Envoyer ma demande
+
+</button>
+
+
+<div id="confirmationConseil"
+class="confirmation">
+
+<i class="fa-solid fa-circle-check"></i>
+
+Votre demande a été envoyée avec succès.
+
+</div>
+
+
+<button class="btn btn-retour"
+onclick="fermerServices()">
+
+<i class="fa-solid fa-arrow-left"></i>
+
+Retour aux services
+
+</button>
+
+</div>
+
+
+<button class="btn btn-danger"
+onclick="seDeconnecter()">
+
+<i class="fa-solid fa-right-from-bracket"></i>
+
+Se déconnecter
+
+</button>
+
+</main>
+
+
+<footer>
+
+© 2026 <strong>AMEET</strong> —
+Amicale des Élèves et Étudiants de Tanaff
+
+</footer>
+
+</div>
+
+
+<!-- =========================================================
+     PAGE RÉCAPITULATIF LOGEMENT
+========================================================= -->
+
+<div id="pageRecapLogement" class="page">
+
+<div class="page-logement">
+
+<div class="logement-box">
+
+<div class="logement-titre">
+
+<h1>Récapitulatif de la demande</h1>
+
+<p>
+Veuillez vérifier attentivement vos informations.
+</p>
+
+</div>
+
+
+<div class="recap">
+
+<div class="recap-ligne">
+
+<span>Nom</span>
+
+<strong id="recapNom">-</strong>
+
+</div>
+
+
+<div class="recap-ligne">
+
+<span>Prénom</span>
+
+<strong id="recapPrenom">-</strong>
+
+</div>
+
+
+<div class="recap-ligne">
+
+<span>Sexe</span>
+
+<strong id="recapSexe">-</strong>
+
+</div>
+
+
+<div class="recap-ligne">
+
+<span>Quartier résidentiel</span>
+
+<strong id="recapQuartier">-</strong>
+
+</div>
+
+
+<div class="recap-ligne">
+
+<span>Téléphone étudiant</span>
+
+<strong id="recapTelephone">-</strong>
+
+</div>
+
+
+<div class="recap-ligne">
+
+<span>Pièce d'identité</span>
+
+<strong id="recapPiece">-</strong>
+
+</div>
+
+
+<div class="recap-ligne">
+
+<span>Téléphone tuteur</span>
+
+<strong id="recapTuteur">-</strong>
+
+</div>
+
+</div>
+
+
+<button class="btn"
+onclick="confirmerLogement()">
+
+<i class="fa-solid fa-check"></i>
+
+Confirmer
+
+</button>
+
+
+<button class="btn btn-retour"
+onclick="modifierLogement()">
+
+<i class="fa-solid fa-pen"></i>
+
+Modifier
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- =========================================================
+     PAGE PAIEMENT
+========================================================= -->
+
+<div id="pagePaiement" class="page">
+
+<div class="page-logement">
+
+<div class="logement-box">
+
+<div class="logement-titre">
+
+<h1>Paiement du logement</h1>
+
+<p>
+Étape de paiement de votre demande.
+</p>
+
+</div>
+
+
+<div class="paiement-card">
+
+<small>
+Caution logement
+</small>
+
+<div class="montant" id="montantCaution">
+15 000 FCFA
+</div>
+
+<p>
+Montant correspondant à trois mois de caution.
+</p>
+
+</div>
+
+
+<div class="champ">
+
+<label>
+Mode de paiement
+</label>
+
+<select id="modePaiement">
+
+<option value="">
+Sélectionnez un mode de paiement
+</option>
+
+<option value="Wave">
+Wave
+</option>
+
+<option value="Orange Money">
+Orange Money
+</option>
+
+<option value="Espèces">
+Espèces
+</option>
+
+</select>
+
+</div>
+
+
+<div class="champ">
+
+<label>
+Référence / numéro de transaction
+</label>
+
+<input
+type="text"
+id="referencePaiement"
+placeholder="Exemple : numéro de transaction">
+
+</div>
+
+
+<button class="btn"
+onclick="validerPaiement()">
+
+<i class="fa-solid fa-check"></i>
+
+Valider le paiement
+
+</button>
+
+
+<button class="btn btn-retour"
+onclick="retourRecapitulatif()">
+
+<i class="fa-solid fa-arrow-left"></i>
+
+Retour
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- =========================================================
+     PAGE CONFIRMATION PAIEMENT
+========================================================= -->
+
+<div id="pagePaiementValide" class="page">
+
+<div class="page-logement">
+
+<div class="logement-box">
+
+<div class="logement-titre">
+
+<h1>Paiement enregistré</h1>
+
+<p>
+Votre demande de logement a été prise en compte.
+</p>
+
+</div>
+
+
+<div class="rang-final">
+
+<small>
+Votre ordre de paiement
+</small>
+
+<strong id="rangPaiement">
+#1
+</strong>
+
+<p>
+Ce rang correspond à l'ordre de validation
+de votre paiement sur cet appareil.
+</p>
+
+</div>
+
+
+<div class="recap">
+
+<div class="recap-ligne">
+
+<span>Nom complet</span>
+
+<strong id="finalNom">-</strong>
+
+</div>
+
+
+<div class="recap-ligne">
+
+<span>Sexe</span>
+
+<strong id="finalSexe">-</strong>
+
+</div>
+
+
+<div class="recap-ligne">
+
+<span>Quartier</span>
+
+<strong id="finalQuartier">-</strong>
+
+</div>
+
+
+<div class="recap-ligne">
+
+<span>Téléphone</span>
+
+<strong id="finalTelephone">-</strong>
+
+</div>
+
+
+<div class="recap-ligne">
+
+<span>Pièce d'identité</span>
+
+<strong id="finalPiece">-</strong>
+
+</div>
+
+
+<div class="recap-ligne">
+
+<span>Téléphone tuteur</span>
+
+<strong id="finalTuteur">-</strong>
+
+</div>
+
+
+<div class="recap-ligne">
+
+<span>Montant payé</span>
+
+<strong id="finalMontant">-</strong>
+
+</div>
+
+
+<div class="recap-ligne">
+
+<span>Mode de paiement</span>
+
+<strong id="finalMode">-</strong>
+
+</div>
+
+
+<div class="recap-ligne">
+
+<span>Référence</span>
+
+<strong id="finalReference">-</strong>
+
+</div>
+
+</div>
+
+
+<button class="btn"
+onclick="retourEspaceEtudiant()">
+
+<i class="fa-solid fa-house"></i>
+
+Retour à mon espace
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+<script>
+
+/* =========================================================
+   VARIABLES
+========================================================= */
+
+let demandeLogement = {};
+
+const CAUTION_MOIS = 5000;
+const NOMBRE_MOIS = 3;
+
+const CAUTION_TOTALE =
+CAUTION_MOIS * NOMBRE_MOIS;
+
+
+/* =========================================================
+   AFFICHAGE DES PAGES
+========================================================= */
+
+function afficherPage(id){
+
+document.querySelectorAll(".page")
+.forEach(function(page){
+
+page.classList.remove("active");
+
+});
+
+document
+.getElementById(id)
+.classList.add("active");
+
+window.scrollTo(0,0);
+
+}
+
+
+/* =========================================================
+   CONNEXION
+========================================================= */
+
+function seConnecter(){
+
+let utilisateur =
+document.getElementById("utilisateur").value.trim();
+
+let motdepasse =
+document.getElementById("motdepasse").value.trim();
+
+if(!utilisateur || !motdepasse){
+
+alert(
+"Veuillez renseigner votre nom d'utilisateur et votre mot de passe."
+);
+
+return;
+
+}
+
+document
+.getElementById("nomEtudiant")
+.textContent = utilisateur;
+
+afficherPage("pageAccueil");
+
+}
+
+
+/* =========================================================
+   INSCRIPTION
+========================================================= */
+
+function afficherInscription(){
+
+afficherPage("pageInscription");
+
+}
+
+
+function afficherConnexion(){
+
+afficherPage("pageConnexion");
+
+}
+
+
+/* =========================================================
+   NETTOYAGE NOM
+========================================================= */
+
+function nettoyerNom(texte){
+
+return texte
+.normalize("NFD")
+.replace(/[\u0300-\u036f]/g,"")
+.replace(/[^a-zA-Z0-9]/g,"");
+
+}
+
+
+/* =========================================================
+   INSCRIPTION
+========================================================= */
+
+function envoyerInscription(){
+
+let prenom =
+document.getElementById("prenom").value.trim();
+
+let nom =
+document.getElementById("nom").value.trim();
+
+let faculte =
+document.getElementById("faculte").value.trim();
+
+let departement =
+document.getElementById("departement").value.trim();
+
+let formation =
+document.getElementById("formation").value.trim();
+
+let niveau =
+document.getElementById("niveau").value;
+
+let email =
+document.getElementById("email").value.trim();
+
+if(
+!prenom ||
+!nom ||
+!faculte ||
+!departement ||
+!formation ||
+!niveau ||
+!email
+){
+
+alert("Veuillez remplir tous les champs.");
+
+return;
+
+}
+
+if(!email.includes("@")){
+
+alert("Veuillez saisir une adresse email valide.");
+
+return;
+
+}
+
+let prenomPropre =
+nettoyerNom(prenom);
+
+let nomPropre =
+nettoyerNom(nom);
+
+let chiffre =
+Math.floor(10 + Math.random()*90);
+
+let nomUtilisateur =
+prenomPropre +
+nomPropre +
+"AmTn" +
+chiffre;
+
+let chiffre1 =
+Math.floor(Math.random()*90)+10;
+
+let chiffre2 =
+Math.floor(Math.random()*10);
+
+let motDePasse =
+chiffre1 +
+"Ameet" +
+"2026" +
+chiffre2;
+
+document
+.getElementById("nouvelUtilisateur")
+.textContent =
+nomUtilisateur;
+
+document
+.getElementById("nouveauMotDePasse")
+.textContent =
+motDePasse;
+
+document
+.getElementById("identifiantsInscription")
+.style.display="block";
+
+document
+.getElementById("confirmationInscription")
+.style.display="block";
+
+}
+
+
+/* =========================================================
+   COPIER
+========================================================= */
+
+function copierTexte(id){
+
+let texte =
+document.getElementById(id).textContent;
+
+navigator.clipboard.writeText(texte)
+.then(function(){
+
+alert("Copié avec succès.");
+
+})
+.catch(function(){
+
+alert("Copie automatique impossible.");
+
+});
+
+}
+
+
+/* =========================================================
+   SERVICES
+========================================================= */
+
+function ouvrirService(nom){
+
+fermerServices();
+
+document
+.getElementById("listeServices")
+.style.display="none";
+
+document
+.getElementById(nom)
+.classList.add("active-service");
+
+window.scrollTo({
+top:0,
+behavior:"smooth"
+});
+
+}
+
+
+function fermerServices(){
+
+document
+.querySelectorAll(".zone-service")
+.forEach(function(zone){
+
+zone.classList.remove("active-service");
+
+});
+
+document
+.getElementById("listeServices")
+.style.display="grid";
+
+}
+
+
+function allerAccueil(){
+
+fermerServices();
+
+window.scrollTo({
+top:0,
+behavior:"smooth"
+});
+
+}
+
+
+/* =========================================================
+   FORMATION
+========================================================= */
+
+function envoyerFormation(){
+
+let formation =
+document.getElementById("formationSouhaitee")
+.value.trim();
+
+let raison =
+document.getElementById("raisonFormation")
+.value.trim();
+
+if(!formation || !raison){
+
+alert("Veuillez remplir les deux champs.");
+
+return;
+
+}
+
+document
+.getElementById("confirmationFormation")
+.style.display="block";
+
+}
+
+
+/* =========================================================
+   LOGEMENT
+   PREMIÈRE ÉTAPE
+========================================================= */
+
+function envoyerLogement(){
+
+let sexe =
+document.getElementById("sexe").value;
+
+let quartier =
+document.getElementById("quartier").value.trim();
+
+let telephone =
+document
+.getElementById("telephoneEtudiant")
+.value.trim();
+
+let piece =
+document
+.getElementById("pieceIdentite")
+.value.trim();
+
+let tuteur =
+document
+.getElementById("telephoneTuteur")
+.value.trim();
+
+
+if(
+!sexe ||
+!quartier ||
+!telephone ||
+!piece ||
+!tuteur
+){
+
+alert(
+"Veuillez remplir tous les champs de la demande de logement."
+);
+
+return;
+
+}
+
+
+/* Récupération du nom de l'étudiant */
+
+let nomUtilisateur =
+document
+.getElementById("nomEtudiant")
+.textContent;
+
+
+/* Stockage */
+
+demandeLogement = {
+
+nomUtilisateur:nomUtilisateur,
+
+nom:
+document.getElementById("nom")
+?
+document.getElementById("nom").value.trim()
+:
+"",
+
+prenom:
+document.getElementById("prenom")
+?
+document.getElementById("prenom").value.trim()
+:
+"",
+
+sexe:sexe,
+
+quartier:quartier,
+
+telephone:telephone,
+
+piece:piece,
+
+tuteur:tuteur,
+
+montant:CAUTION_TOTALE
+
+};
+
+
+/* Affichage récapitulatif */
+
+document
+.getElementById("recapNom")
+.textContent =
+demandeLogement.nom || nomUtilisateur;
+
+document
+.getElementById("recapPrenom")
+.textContent =
+demandeLogement.prenom || "-";
+
+document
+.getElementById("recapSexe")
+.textContent =
+sexe;
+
+document
+.getElementById("recapQuartier")
+.textContent =
+quartier;
+
+document
+.getElementById("recapTelephone")
+.textContent =
+telephone;
+
+document
+.getElementById("recapPiece")
+.textContent =
+piece;
+
+document
+.getElementById("recapTuteur")
+.textContent =
+tuteur;
+
+
+/* Ouvrir la page suivante */
+
+afficherPage("pageRecapLogement");
+
+}
+
+
+/* =========================================================
+   MODIFIER LA DEMANDE
+========================================================= */
+
+function modifierLogement(){
+
+afficherPage("pageAccueil");
+
+ouvrirService("logement");
+
+}
+
+
+/* =========================================================
+   CONFIRMER LA DEMANDE
+========================================================= */
+
+function confirmerLogement(){
+
+afficherPage("pagePaiement");
+
+document
+.getElementById("montantCaution")
+.textContent =
+CAUTION_TOTALE.toLocaleString("fr-FR")
++
+" FCFA";
+
+}
+
+
+/* =========================================================
+   RETOUR RÉCAPITULATIF
+========================================================= */
+
+function retourRecapitulatif(){
+
+afficherPage("pageRecapLogement");
+
+}
+
+
+/* =========================================================
+   PAIEMENT
+========================================================= */
+
+function validerPaiement(){
+
+let mode =
+document.getElementById("modePaiement")
+.value;
+
+let reference =
+document
+.getElementById("referencePaiement")
+.value.trim();
+
+
+if(!mode){
+
+alert(
+"Veuillez sélectionner un mode de paiement."
+);
+
+return;
+
+}
+
+if(!reference){
+
+alert(
+"Veuillez renseigner la référence ou le numéro de transaction."
+);
+
+return;
+
+}
+
+
+/*
+   ORDRE DE PAIEMENT
+
+   Pour cette version de démonstration,
+   le rang est conservé dans le navigateur.
+*/
+
+let rang =
+parseInt(
+localStorage.getItem("ordrePaiementAMEET") || "0"
+);
+
+rang++;
+
+localStorage.setItem(
+"ordrePaiementAMEET",
+rang
+);
+
+
+/* Informations finales */
+
+document
+.getElementById("rangPaiement")
+.textContent =
+"#" + rang;
+
+document
+.getElementById("finalNom")
+.textContent =
+demandeLogement.nom ||
+demandeLogement.nomUtilisateur;
+
+document
+.getElementById("finalSexe")
+.textContent =
+demandeLogement.sexe;
+
+document
+.getElementById("finalQuartier")
+.textContent =
+demandeLogement.quartier;
+
+document
+.getElementById("finalTelephone")
+.textContent =
+demandeLogement.telephone;
+
+document
+.getElementById("finalPiece")
+.textContent =
+demandeLogement.piece;
+
+document
+.getElementById("finalTuteur")
+.textContent =
+demandeLogement.tuteur;
+
+document
+.getElementById("finalMontant")
+.textContent =
+CAUTION_TOTALE.toLocaleString("fr-FR")
++
+" FCFA";
+
+document
+.getElementById("finalMode")
+.textContent =
+mode;
+
+document
+.getElementById("finalReference")
+.textContent =
+reference;
+
+
+/* Passage à la page finale */
+
+afficherPage("pagePaiementValide");
+
+}
+
+
+/* =========================================================
+   CONSEIL
+========================================================= */
+
+function envoyerConseil(){
+
+let question =
+document
+.getElementById("questionConseil")
+.value.trim();
+
+if(!question){
+
+alert(
+"Veuillez écrire votre demande."
+);
+
+return;
+
+}
+
+document
+.getElementById("confirmationConseil")
+.style.display="block";
+
+}
+
+
+/* =========================================================
+   RETOUR ESPACE ÉTUDIANT
+========================================================= */
+
+function retourEspaceEtudiant(){
+
+afficherPage("pageAccueil");
+
+}
+
+
+/* =========================================================
+   DÉCONNEXION
+========================================================= */
+
+function seDeconnecter(){
+
+fermerServices();
+
+document
+.getElementById("utilisateur")
+.value="";
+
+document
+.getElementById("motdepasse")
+.value="";
+
+afficherPage("pageConnexion");
+
+}
+
+</script>
+
+</body>
+
+</html>
